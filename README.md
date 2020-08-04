@@ -14,9 +14,9 @@ the `repl-mode-template.kak` file for more more information.
 ## Installing with plug.kak
 Add the following to your kakrc:
 ```
-plug "jordan-yee/repl-mode" config %{
+plug "jordan-yee/kakoune-repl-mode" config %{
     # Optionally set the window manager if not using tmux
-    set-option global repl_window_manager 'kitty'
+    set-option global repl_mode_window_manager 'kitty'
 } defer repl-mode %{
     # Suggested binding
     map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
