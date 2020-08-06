@@ -5,7 +5,7 @@ This plugin intends to provide a window-manager-agnostic set of commands and
 mappings for interacting with a REPL that improve upon and extend the REPL
 commands that ship with Kakoune.
 
-Currently, only tmux functionality is included, but the plugin is setup to
+Currently, only tmux functionality is included, but the plugin is set up to
 make it as easy as possible to add support for a different window manager. See
 the `repl-mode-template.kak` file for more more information.
 
