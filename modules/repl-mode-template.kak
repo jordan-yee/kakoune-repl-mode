@@ -99,5 +99,3 @@ provide-module repl-mode-template %{
     }
 
 }
-
-require-module repl-mode
