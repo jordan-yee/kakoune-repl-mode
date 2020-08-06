@@ -85,3 +85,6 @@ are being used for this plugin:
 | window | tmux pane / vim window                     |
 | below  | tmux vertical split / vim horizontal split |
 | right  | tmux horizontal split / vim vertical split |
+
+# Design Notes
+This plugin was written with [these principles](https://github.com/jordan-yee/principles/blob/master/kakoune-plugins.md) in mind.
