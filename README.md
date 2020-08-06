@@ -36,10 +36,8 @@ autoload folder, then add the following to your kakrc:
 # This option will be set to 'tmux' by default
 set-option global repl_window_manager 'tmux'
 
-hook global ModuleLoaded repl-mode %{
-    # Suggested binding
-    map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
-}
+# Suggested user mode mapping
+map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
 
 require-module repl-mode
 ```
@@ -78,7 +76,6 @@ used with this suggested leader key.
     `repl-mode-tmux.kak` script.
 
 # Terminology
-
 Since different window managers have different terminology, the following terms
 are being used for this plugin:
 
