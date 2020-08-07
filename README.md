@@ -1,5 +1,5 @@
 # kakoune-repl-mode
-Kakoune plugin providing improved REPL interaction
+[Kakoune](http://kakoune.org) plugin providing improved REPL interaction
 
 This plugin intends to provide a window-manager-agnostic set of commands and
 mappings for interacting with a REPL that improve upon and extend the REPL
@@ -10,9 +10,12 @@ make it as easy as possible to add support for a different window manager. See
 the `repl-mode-template.kak` file for more more information.
 
 # Installation
+This plugin requires the windowing scripts that ship with Kakoune when using the
+included tmux repl-mode implementation.
 
 ## Installing with plug.kak
-Add the following to your kakrc:
+To install with [plug.kak](https://github.com/andreyorst/plug.kak), add the
+following to your kakrc, then run the `:plug-install` command:
 ```
 plug "jordan-yee/kakoune-repl-mode" config %{
     # Suggested user mode mapping
@@ -28,7 +31,7 @@ plug "jordan-yee/kakoune-repl-mode" config %{
 ```
 
 ## Installing manually
-Download the repl-mode.kak script and whichever window-manager script(s) you
+Download `repl-mode.kak` and whichever window manager script(s) you
 wish to use, and either source them in your kakrc or copy them to your
 autoload folder, then add the following to your kakrc:
 ```
@@ -43,13 +46,14 @@ require-module repl-mode
 ```
 
 # Usage
-
 The suggested user mode binding for activating repl mode is:
 ```
 map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
 ```
 The assigned mappings for repl mode were chosen to be mechanically fluid when
 used with this suggested leader key.
+
+## repl mode mappings
 
 | key | command               | description                    |
 | --- | --------------------- | ------------------------------ |
