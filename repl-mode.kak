@@ -19,12 +19,12 @@ str repl_mode_window_manager 'tmux'
 
 hook global ModuleLoaded repl-mode %{
     declare-user-mode repl
-    map global repl l ': repl-open-right<ret>' -docstring "Open a REPL split to the right"
-    map global repl j ': repl-open-below<ret>' -docstring "Open a REPL split below"
-    map global repl t ': repl-open-tab<ret>' -docstring "Open a REPL in a new tab"
-    map global repl i ': repl-prompt-window-id<ret>' -docstring "Set REPL window ID"
-    map global repl o ': repl-focus<ret>' -docstring "Focus the REPL window"
-    map global repl s ': repl-send-text<ret>' -docstring "Send selected text to REPL"
+    map global repl l ': repl-mode-open-right<ret>' -docstring "Open a REPL split to the right"
+    map global repl j ': repl-mode-open-below<ret>' -docstring "Open a REPL split below"
+    map global repl t ': repl-mode-open-tab<ret>' -docstring "Open a REPL in a new tab"
+    map global repl i ': repl-mode-prompt-window-id<ret>' -docstring "Set REPL window ID"
+    map global repl o ': repl-mode-focus<ret>' -docstring "Focus the REPL window"
+    map global repl s ': repl-mode-send-text<ret>' -docstring "Send selected text to REPL"
 }
 
 # NOTE: File containing provide-module for the window manager specified by the
