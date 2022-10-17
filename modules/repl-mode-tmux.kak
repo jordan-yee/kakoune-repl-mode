@@ -53,11 +53,7 @@ provide-module repl-mode-tmux %{
 
     define-command -docstring "Focus the REPL window" \
     repl-mode-focus %{
-        # TODO: Not sure how to handle this when the shell block isn't returning
-        #       something to be evaluated by Kakoune. Prefixing the sh block
-        #       with with either evaluate-commands or echo prevents a command
-        #       not found error.
-        echo %sh{
+        nop %sh{
             tmux select-window -t $kak_opt_tmux_repl_id
             tmux select-pane -t $kak_opt_tmux_repl_id
         }
@@ -66,6 +62,7 @@ provide-module repl-mode-tmux %{
     define-command -docstring "Send selected text to the REPL" \
     repl-mode-send-text %{
         repl-send-text
+        nop %sh{tmux send -t $kak_opt_tmux_repl_id "" C-m}
         repl-mode-focus
     }
 
