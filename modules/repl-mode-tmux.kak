@@ -62,6 +62,12 @@ provide-module repl-mode-tmux %{
     define-command -docstring "Send selected text to the REPL" \
     repl-mode-send-text %{
         repl-send-text
+        repl-mode-focus
+    }
+
+    define-command -docstring "Evaluate selected text at the REPL" \
+    repl-mode-eval-text %{
+        repl-send-text
         nop %sh{tmux send -t $kak_opt_tmux_repl_id "" C-m}
         repl-mode-focus
     }
