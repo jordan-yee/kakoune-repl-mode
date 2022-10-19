@@ -17,6 +17,9 @@ Currently supported implementations:
     tmux (default)' \
 str repl_mode_window_manager 'tmux'
 
+declare-option -docstring 'the command used to launch a REPL' \
+str repl_mode_new_repl_command
+
 hook global ModuleLoaded repl-mode %{
     declare-user-mode repl
     map global repl l ': repl-mode-open-right<ret>' -docstring "Open a REPL split to the right"

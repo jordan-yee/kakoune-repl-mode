@@ -26,6 +26,22 @@ plug "jordan-yee/kakoune-repl-mode" config %{
     #  repl-mode-kitty module. Copy repl-mode-template.kak to get started.)
     set-option global repl_mode_window_manager 'kitty'
 
+    # Optionally set a command to launch a new REPL
+    # - This is unset by default, which will cause new REPL windows to simply
+    #   open a shell prompt.
+    # - The provided repl-mode-tmux implementation uses this option, but you
+    #   will have to handle it yourself if implementing the commands for a
+    #   different terminal/window manager.
+    # - You will likely want to set this differently for different languages,
+    #   or even different projects.
+    hook global WinSetOption filetype=clojure %{
+      set-option window repl_mode_new_repl_command 'lein repl'
+
+      hook -once -always window WinSetOption filetype=.* %{
+        unset-option window repl_mode_new_repl_command
+      }
+    }
+
     require-module repl-mode
 }
 ```

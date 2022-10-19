@@ -6,17 +6,35 @@ provide-module repl-mode-tmux %{
 
     define-command -docstring "Open a REPL split below" \
     repl-mode-open-below %{
-        tmux-repl-vertical
+        evaluate-commands %sh{
+            if [ "$kak_opt_repl_mode_new_repl_command" ]; then
+                printf "%s\n" "tmux-repl-vertical $kak_opt_repl_mode_new_repl_command"
+            else
+                printf "%s\n" "tmux-repl-vertical"
+            fi
+        }
     }
 
     define-command -docstring "Open a REPL split to the right" \
     repl-mode-open-right %{
-        tmux-repl-horizontal
+        evaluate-commands %sh{
+            if [ "$kak_opt_repl_mode_new_repl_command" ]; then
+                printf "%s\n" "tmux-repl-horizontal $kak_opt_repl_mode_new_repl_command"
+            else
+                printf "%s\n" "tmux-repl-horizontal"
+            fi
+        }
     }
 
     define-command -docstring "Open a REPL in a new tab" \
     repl-mode-open-tab %{
-        tmux-repl-window
+        evaluate-commands %sh{
+            if [ "$kak_opt_repl_mode_new_repl_command" ]; then
+                printf "%s\n" "tmux-repl-window $kak_opt_repl_mode_new_repl_command"
+            else
+                printf "%s\n" "tmux-repl-window"
+            fi
+        }
     }
 
     define-command -hidden \
