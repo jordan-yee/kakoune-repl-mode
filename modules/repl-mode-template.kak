@@ -14,7 +14,7 @@
 # [x] repl-mode-prompt-window-id
 # [x] repl-mode-focus
 # [x] repl-mode-send-text
-# [ ] repl-mode-eval-text
+# [x] repl-mode-eval-text
 # The below actions can be performed using a window manager, but are not
 # currently included in this module. Adding them would enable the REPL window ID
 # option to be updated after the REPL window is moved, which may not be an issue
@@ -103,8 +103,8 @@ provide-module repl-mode-template %{
     # this should also check whether the currently set REPL window id is a
     # Kakoune client and abort with an error message to prevent unintended keys
     # from executing in an instance of Kakoune.
-    define-command -docstring "Evaluate selected text at the REPL" \
-    repl-mode-eval-text %{
+    define-command -docstring "repl-mode-eval-text [text-to-eval]: Evaluate selected text OR [text-to-eval], if given, at the REPL" \
+    repl-mode-eval-text -params ..1 %{
         # Existing alias for several window managers:
         # send-text
 

@@ -83,9 +83,16 @@ provide-module repl-mode-tmux %{
         repl-mode-focus
     }
 
-    define-command -docstring "Evaluate selected text at the REPL" \
-    repl-mode-eval-text %{
-        repl-send-text
+    define-command -docstring "repl-mode-eval-text [text-to-eval]: Evaluate text at the REPL\n
+    If no text is passed, then the selection is used" \
+    repl-mode-eval-text -params ..1 %{
+        evaluate-commands %sh{
+            if [ $# -eq 0 ]; then
+                printf "%s\n" "repl-send-text"
+            else
+                printf "%s %s\n" "repl-send-text %{$1}"
+            fi
+        }
         nop %sh{tmux send -t $kak_opt_tmux_repl_id "" C-m}
         repl-mode-focus
     }
