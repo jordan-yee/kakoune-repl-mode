@@ -24,7 +24,7 @@ plug "jordan-yee/kakoune-repl-mode" config %{
     map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
 
     # Register default mappings for the `repl` user-mode:
-    register-default-mappings
+    repl-mode-register-default-mappings
 
     # Optionally set the window manager if not using tmux
     #  (The following will only work if you've provided a custom
@@ -65,7 +65,7 @@ require-module repl-mode
 map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
 
 # Register default mappings for the `repl` user-mode:
-register-default-mappings
+repl-mode-register-default-mappings
 ```
 
 # Usage
