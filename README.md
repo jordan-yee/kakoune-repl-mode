@@ -136,7 +136,7 @@ My Keypresses (example):
 6. TMUX paste (which includes a newline that submits the prompt): `<c-w>]`
 7. Focus the REPL via the Kakoune mapping: `<space>ro`
 
-Terminology
+# Terminology
 Since different window managers have different terminology, the following terms
 are being used for this plugin:
 
