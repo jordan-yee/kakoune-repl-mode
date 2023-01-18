@@ -18,8 +18,13 @@ To install with [plug.kak](https://github.com/andreyorst/plug.kak), add the
 following to your kakrc, then run the `:plug-install` command:
 ```
 plug "jordan-yee/kakoune-repl-mode" config %{
-    # Suggested user mode mapping
+    require-module repl-mode
+
+    # Suggested user mode mapping:
     map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
+
+    # Register default mappings for the `repl` user-mode:
+    register-default-mappings
 
     # Optionally set the window manager if not using tmux
     #  (The following will only work if you've provided a custom
@@ -41,8 +46,6 @@ plug "jordan-yee/kakoune-repl-mode" config %{
         unset-option window repl_mode_new_repl_command
       }
     }
-
-    require-module repl-mode
 }
 ```
 
@@ -55,10 +58,14 @@ autoload folder, then add the following to your kakrc:
 # This option will be set to 'tmux' by default
 set-option global repl_window_manager 'tmux'
 
+# Ensure the repl-mode commands are loaded:
+require-module repl-mode
+
 # Suggested user mode mapping
 map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
 
-require-module repl-mode
+# Register default mappings for the `repl` user-mode:
+register-default-mappings
 ```
 
 # Usage
@@ -71,17 +78,17 @@ used with this suggested leader key.
 
 ## repl mode mappings
 
-| key | command               | description                    |
-| --- | --------------------- | ------------------------------ |
-| l   | repl-open-right       | Open a REPL split to the right |
-| j   | repl-open-below       | Open a REPL split below        |
-| t   | repl-open-tab         | Open a REPL in a new tab       |
-| i   | repl-prompt-window-id | Set REPL window ID             |
-| o   | repl-focus            | Focus the REPL window          |
-| s   | repl-send-text        | Send selected text to REPL     |
+| key | command                    | description                        |
+| --- | -------------------------- | ---------------------------------- |
+| l   | repl-mode-open-right       | Open a REPL split to the right     |
+| j   | repl-mode-open-below       | Open a REPL split below            |
+| w   | repl-mode-open-tab         | Open a REPL in a new tab (window)  |
+| i   | repl-mode-prompt-window-id | Set REPL window ID                 |
+| o   | repl-mode-focus            | Focus the REPL window              |
+| s   | repl-mode-send-text        | Send selected text to REPL         |
+| e   | repl-mode-eval-text        | Evaluate selected text at the REPL |
 
 ## Functionality Notes
-
 - The built-in `repl` command is equivalent to the `repl-open-right` command
   when using tmux.
 - The `repl-send-text` command improves upon the `send-text` command by
@@ -95,7 +102,41 @@ used with this suggested leader key.
   - A recipe for quickly fixing the reference for tmux is provided in the
     `repl-mode-tmux.kak` script.
 
-# Terminology
+## Connection to a REPL pane when using TMUX
+When opening a REPL using the included commands/mappings, the REPL ID is
+automatically registered. If you restart Kakoune or otherwise want to connect to
+an existing REPL pane, you would use the `repl-mode-prompt-window-id` command
+(mapped to `i` by default). The problem then becomes how to get the target
+window id. Below is the strategy I use for getting the ID in TMUX.
+
+How to quickly get a specific ID in tmux:
+1. Focus the pane containing the REPL.
+2. Execute the tmux command:
+   - `display-message -P '#{session_id}:#{window_id}.#{pane_id}'`
+   - Adding an alias or binding for this is suggested.
+3. Press `D` or key bound to copy-end-of-line.
+4. Return to Kakoune and press `,ri` or trigger the `repl-mode-prompt-window-id` command.
+5. Press the tmux leader key followed by `]` or whichever key is bound to paste.
+   - This will paste the line with the copied ID, including the newline, which will
+     submit the prompt. The new REPL window ID is now set.
+6. Test the setting using the `repl-mode-focus` command below, or go ahead and use
+   `repl-mode-send-text` or the default `repl-send-text`.
+
+My Keypresses (example):
+- My tmux leader key is `<c-w>`.
+- My Kakoune user-mode key is `<space>`.
+- My repl-mode binding is `<r>`.
+- Assuming target REPL is the "next" window.
+
+1. Focus target REPL pane: `<c-w>n`
+2. Execute aliased TMUX command to display ID: `<c-w>:did<ret>`
+3. Copy the displayed ID to the TMUX clipboard: `D`
+4. Return to Kakoune: `<c-w>p`
+5. Trigger mapping for "repl-mode-prompt-window-id" command: `<space>ri`
+6. TMUX paste (which includes a newline that submits the prompt): `<c-w>]`
+7. Focus the REPL via the Kakoune mapping: `<space>ro`
+
+Terminology
 Since different window managers have different terminology, the following terms
 are being used for this plugin:
 
