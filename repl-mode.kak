@@ -20,11 +20,11 @@ str repl_mode_window_manager 'tmux'
 declare-option -docstring 'the command used to launch a REPL' \
 str repl_mode_new_repl_command
 
-hook global ModuleLoaded repl-mode %{
+define-command register-default-mappings %{
     declare-user-mode repl
     map global repl l ': repl-mode-open-right<ret>' -docstring "Open a REPL split to the right"
     map global repl j ': repl-mode-open-below<ret>' -docstring "Open a REPL split below"
-    map global repl t ': repl-mode-open-tab<ret>' -docstring "Open a REPL in a new tab"
+    map global repl w ': repl-mode-open-tab<ret>' -docstring "Open a REPL in a new tab (window)"
     map global repl i ': repl-mode-prompt-window-id<ret>' -docstring "Set REPL window ID"
     map global repl o ': repl-mode-focus<ret>' -docstring "Focus the REPL window"
     map global repl s ': repl-mode-send-text<ret>' -docstring "Send selected text to REPL"
