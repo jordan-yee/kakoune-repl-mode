@@ -88,6 +88,10 @@ used with this suggested leader key.
 | s   | repl-mode-send-text        | Send selected text to REPL         |
 | e   | repl-mode-eval-text        | Evaluate selected text at the REPL |
 
+## Other Commands
+
+`repl-mode-set-new-repl-command <value>`: set the command used to open a new REPL in the current window scope
+
 ## Functionality Notes
 - The built-in `repl` command is equivalent to the `repl-open-right` command
   when using tmux.

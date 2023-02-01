@@ -20,6 +20,12 @@ str repl_mode_window_manager 'tmux'
 declare-option -docstring 'the command used to launch a REPL' \
 str repl_mode_new_repl_command
 
+define-command repl-mode-set-new-repl-command -params 1 \
+-docstring 'repl-mode-set-new-repl-command <value>: set the command used to open a new REPL in the current window scope' \
+%{
+    set-option window repl_mode_new_repl_command %arg{1}
+}
+
 define-command repl-mode-register-default-mappings %{
     declare-user-mode repl
     map global repl l ': repl-mode-open-right<ret>' -docstring "Open a REPL split to the right"
