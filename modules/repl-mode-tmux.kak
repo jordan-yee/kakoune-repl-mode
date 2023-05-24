@@ -97,4 +97,10 @@ provide-module repl-mode-tmux %{
         repl-mode-focus
     }
 
+    define-command -docstring "repl-mode-eval-last-command: Re-run the last executed command at the REPL" \
+    repl-mode-eval-last-command %{
+        nop %sh{tmux send -t $kak_opt_tmux_repl_id "Up" C-m}
+        repl-mode-focus
+    }
+
 }

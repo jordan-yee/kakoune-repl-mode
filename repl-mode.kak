@@ -35,6 +35,7 @@ define-command repl-mode-register-default-mappings %{
     map global repl o ': repl-mode-focus<ret>' -docstring "Focus the REPL window"
     map global repl s ': repl-mode-send-text<ret>' -docstring "Send selected text to REPL"
     map global repl e ': repl-mode-eval-text<ret>' -docstring "Evaluate selected text at the REPL"
+    map global repl . ': repl-mode-eval-last-command<ret>' -docstring "Evaluate last executed command at the REPL"
 }
 
 # NOTE: File containing provide-module for the window manager specified by the

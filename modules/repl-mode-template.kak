@@ -15,6 +15,7 @@
 # [x] repl-mode-focus
 # [x] repl-mode-send-text
 # [x] repl-mode-eval-text
+# [x] repl-mode-eval-last-command
 # The below actions can be performed using a window manager, but are not
 # currently included in this module. Adding them would enable the REPL window ID
 # option to be updated after the REPL window is moved, which may not be an issue
@@ -111,6 +112,20 @@ provide-module repl-mode-template %{
         # Focus the REPL window after sending text to be evaluated.
         # repl-mode-focus
         echo "Command not implemented: repl-mode-eval-text"
+    }
+
+    # TODO: Send an up-arrow keypress to the REPL window and focus it. Ideally,
+    # this should also check whether the currently set REPL window id is a
+    # Kakoune client and abort with an error message to prevent unintended keys
+    # from executing in an instance of Kakoune.
+    define-command -docstring "repl-mode-eval-last-command: Re-run the last executed command at the REPL" \
+    repl-mode-eval-last-command %{
+        # Existing alias for several window managers:
+        # repl-send-text
+
+        # Focus the REPL window after sending text to be evaluated.
+        # repl-mode-focus
+        echo "Command not implemented: repl-mode-eval-last-command"
     }
 
 }

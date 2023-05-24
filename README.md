@@ -78,15 +78,16 @@ used with this suggested leader key.
 
 ## repl mode mappings
 
-| key | command                    | description                        |
-| --- | -------------------------- | ---------------------------------- |
-| l   | repl-mode-open-right       | Open a REPL split to the right     |
-| j   | repl-mode-open-below       | Open a REPL split below            |
-| w   | repl-mode-open-tab         | Open a REPL in a new tab (window)  |
-| i   | repl-mode-prompt-window-id | Set REPL window ID                 |
-| o   | repl-mode-focus            | Focus the REPL window              |
-| s   | repl-mode-send-text        | Send selected text to REPL         |
-| e   | repl-mode-eval-text        | Evaluate selected text at the REPL |
+| key | command                     | description                        |
+| --- | --------------------------  | ---------------------------------- |
+| l   | repl-mode-open-right        | Open a REPL split to the right     |
+| j   | repl-mode-open-below        | Open a REPL split below            |
+| w   | repl-mode-open-tab          | Open a REPL in a new tab (window)  |
+| i   | repl-mode-prompt-window-id  | Set REPL window ID                 |
+| o   | repl-mode-focus             | Focus the REPL window              |
+| s   | repl-mode-send-text         | Send selected text to REPL         |
+| e   | repl-mode-eval-text         | Evaluate selected text at the REPL |
+| .   | repl-mode-eval-last-command | Evaluate last command at the REPL  |
 
 ## Other Commands
 
