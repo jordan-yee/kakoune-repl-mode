@@ -1,13 +1,19 @@
 # kakoune-repl-mode
-[Kakoune](http://kakoune.org) plugin providing improved REPL interaction
+A [Kakoune](http://kakoune.org) plugin providing improved REPL interaction.
 
 This plugin intends to provide a window-manager-agnostic set of commands and
 mappings for interacting with a REPL that improve upon and extend the REPL
 commands that ship with Kakoune.
 
-Currently, only tmux functionality is included, but the plugin is set up to
-make it as easy as possible to add support for a different window manager. See
-the `repl-mode-template.kak` file for more more information.
+Currently, only TMUX functionality is included, but a generic interface is
+provided to make it as easy as possible to add support for a different window
+manager (see the `repl-mode-template.kak` file).
+
+**TODO:**
+- [ ] Check whether there's a connected REPL before executing send/eval
+  commands.
+- [ ] Provide some kind of menu to more easily set the connected repl window
+  from available, detected options.
 
 # Usage
 The suggested user mode binding for activating repl mode is:
@@ -17,7 +23,15 @@ map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
 The assigned mappings for repl mode were chosen to be mechanically fluid when
 used with this suggested leader key.
 
-## repl mode mappings
+> While this plugin was written with the idea of evaluating source code at a
+> REPL, another really nice use case I've found is to evaluate shell commands,
+> such as those included in A README file.
+>
+> While viewing a README, you can quickly open a connected repl-terminal split
+> from Kakoune with `<space>rl`, select the command, then eval it with
+> `<space>re`.
+
+## Provided 'repl' mode mappings
 
 | key | command                     | description                        |
 | --- | --------------------------  | ---------------------------------- |
@@ -32,9 +46,14 @@ used with this suggested leader key.
 
 ## Other Commands
 
-`repl-mode-set-new-repl-command <value>`: set the command used to open a new REPL in the current window scope
+`repl-mode-set-new-repl-command <value>`: Set the command used to open a new
+REPL in the current and window scope.
+- This is unset by default, meaning the open repl commands will simply open a
+  terminal that you can send-text to.
+- You can set this to start an actual REPL for the current window's filetype
+  (see example in installation instructions below).
 
-## Functionality Notes
+## Differences to stock repl commands
 - The built-in `repl` command is equivalent to the `repl-open-right` command
   when using tmux.
 - The `repl-send-text` command improves upon the `send-text` command by
@@ -45,8 +64,7 @@ used with this suggested leader key.
   losing the "connection" to the REPL window when moving it. This may not be
   a problem for all window managers, but it is a problem when moving the REPL
   window (tmux pane) to a new tab (tmux window) in tmux.
-  - A recipe for quickly fixing the reference for tmux is provided in the
-    `repl-mode-tmux.kak` script.
+  - A recipe for quickly fixing the reference for tmux is provided below.
 
 ## Connection to a REPL pane when using TMUX
 When opening a REPL using the included commands/mappings, the REPL ID is
@@ -55,11 +73,10 @@ an existing REPL pane, you would use the `repl-mode-prompt-window-id` command
 (mapped to `i` by default). The problem then becomes how to get the target
 window id. Below is the strategy I use for getting the ID in TMUX.
 
-How to quickly get a specific ID in tmux:
+How to quickly get a specific ID in tmux (manual steps):
 1. Focus the pane containing the REPL.
 2. Execute the tmux command:
    - `display-message -P '#{session_id}:#{window_id}.#{pane_id}'`
-   - Adding an alias or binding for this is suggested.
 3. Press `D` or key bound to copy-end-of-line.
 4. Return to Kakoune and press `,ri` or trigger the `repl-mode-prompt-window-id` command.
 5. Press the tmux leader key followed by `]` or whichever key is bound to paste.
@@ -68,6 +85,13 @@ How to quickly get a specific ID in tmux:
 6. Test the setting using the `repl-mode-focus` command below, or go ahead and use
    `repl-mode-send-text` or the default `repl-send-text`.
 
+To automate those manual steps a bit, add the following to your `.tmux.conf`:
+```
+# Copy ID
+set-option -s command-alias[0] cpid="display-message -p '#{session_id}:#{window_id}.#{pane_id}'; send 'D'"
+bind I "cpid"
+```
+
 My Keypresses (example):
 - My tmux leader key is `<c-w>`.
 - My Kakoune user-mode key is `<space>`.
@@ -75,23 +99,11 @@ My Keypresses (example):
 - Assuming target REPL is the "next" window.
 
 1. Focus target REPL pane: `<c-w>n`
-2. Execute aliased TMUX command to display ID: `<c-w>:did<ret>`
-3. Copy the displayed ID to the TMUX clipboard: `D`
+2. Execute TMUX binding to copy the pane ID: `<c-w>I`
 4. Return to Kakoune: `<c-w>p`
 5. Trigger mapping for "repl-mode-prompt-window-id" command: `<space>ri`
 6. TMUX paste (which includes a newline that submits the prompt): `<c-w>]`
 7. Focus the REPL via the Kakoune mapping: `<space>ro`
-
-# Terminology
-Since different window managers have different terminology, the following terms
-are being used for this plugin:
-
-| term   | meaning                                    |
-| ------ | ------------------------------------------ |
-| tab    | tmux window / vim tab page                 |
-| window | tmux pane / vim window                     |
-| below  | tmux vertical split / vim horizontal split |
-| right  | tmux horizontal split / vim vertical split |
 
 # Installation
 This plugin requires the windowing scripts that ship with Kakoune when using the
@@ -151,6 +163,17 @@ map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
 # Register default mappings for the `repl` user-mode:
 repl-mode-register-default-mappings
 ```
+
+# Terminology
+Since different window managers have different terminology, the following terms
+are being used for this plugin:
+
+| term   | meaning                                    |
+| ------ | ------------------------------------------ |
+| tab    | tmux window / vim tab page                 |
+| window | tmux pane / vim window                     |
+| below  | tmux vertical split / vim horizontal split |
+| right  | tmux horizontal split / vim vertical split |
 
 # Design Notes
 This plugin was written with [these principles](https://github.com/jordan-yee/principles/blob/master/kakoune-plugins.md) in mind.
