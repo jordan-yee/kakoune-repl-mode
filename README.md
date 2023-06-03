@@ -9,65 +9,6 @@ Currently, only tmux functionality is included, but the plugin is set up to
 make it as easy as possible to add support for a different window manager. See
 the `repl-mode-template.kak` file for more more information.
 
-# Installation
-This plugin requires the windowing scripts that ship with Kakoune when using the
-included tmux repl-mode implementation.
-
-## Installing with plug.kak
-To install with [plug.kak](https://github.com/andreyorst/plug.kak), add the
-following to your kakrc, then run the `:plug-install` command:
-```
-plug "jordan-yee/kakoune-repl-mode" config %{
-    require-module repl-mode
-
-    # Suggested user mode mapping:
-    map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
-
-    # Register default mappings for the `repl` user-mode:
-    repl-mode-register-default-mappings
-
-    # Optionally set the window manager if not using tmux
-    #  (The following will only work if you've provided a custom
-    #  repl-mode-kitty module. Copy repl-mode-template.kak to get started.)
-    set-option global repl_mode_window_manager 'kitty'
-
-    # Optionally set a command to launch a new REPL
-    # - This is unset by default, which will cause new REPL windows to simply
-    #   open a shell prompt.
-    # - The provided repl-mode-tmux implementation uses this option, but you
-    #   will have to handle it yourself if implementing the commands for a
-    #   different terminal/window manager.
-    # - You will likely want to set this differently for different languages,
-    #   or even different projects.
-    hook global WinSetOption filetype=clojure %{
-      set-option window repl_mode_new_repl_command 'lein repl'
-
-      hook -once -always window WinSetOption filetype=.* %{
-        unset-option window repl_mode_new_repl_command
-      }
-    }
-}
-```
-
-## Installing manually
-Download `repl-mode.kak` and whichever window manager script(s) you
-wish to use, and either source them in your kakrc or copy them to your
-autoload folder, then add the following to your kakrc:
-```
-# Optionally set the window manager
-# This option will be set to 'tmux' by default
-set-option global repl_window_manager 'tmux'
-
-# Ensure the repl-mode commands are loaded:
-require-module repl-mode
-
-# Suggested user mode mapping
-map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
-
-# Register default mappings for the `repl` user-mode:
-repl-mode-register-default-mappings
-```
-
 # Usage
 The suggested user mode binding for activating repl mode is:
 ```
@@ -151,6 +92,65 @@ are being used for this plugin:
 | window | tmux pane / vim window                     |
 | below  | tmux vertical split / vim horizontal split |
 | right  | tmux horizontal split / vim vertical split |
+
+# Installation
+This plugin requires the windowing scripts that ship with Kakoune when using the
+included tmux repl-mode implementation.
+
+## Installing with plug.kak
+To install with [plug.kak](https://github.com/andreyorst/plug.kak), add the
+following to your kakrc, then run the `:plug-install` command:
+```
+plug "jordan-yee/kakoune-repl-mode" config %{
+    require-module repl-mode
+
+    # Suggested user mode mapping:
+    map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
+
+    # Register default mappings for the `repl` user-mode:
+    repl-mode-register-default-mappings
+
+    # Optionally set the window manager if not using tmux
+    #  (The following will only work if you've provided a custom
+    #  repl-mode-kitty module. Copy repl-mode-template.kak to get started.)
+    set-option global repl_mode_window_manager 'kitty'
+
+    # Optionally set a command to launch a new REPL
+    # - This is unset by default, which will cause new REPL windows to simply
+    #   open a shell prompt.
+    # - The provided repl-mode-tmux implementation uses this option, but you
+    #   will have to handle it yourself if implementing the commands for a
+    #   different terminal/window manager.
+    # - You will likely want to set this differently for different languages,
+    #   or even different projects.
+    hook global WinSetOption filetype=clojure %{
+      set-option window repl_mode_new_repl_command 'lein repl'
+
+      hook -once -always window WinSetOption filetype=.* %{
+        unset-option window repl_mode_new_repl_command
+      }
+    }
+}
+```
+
+## Installing manually
+Download `repl-mode.kak` and whichever window manager script(s) you
+wish to use, and either source them in your kakrc or copy them to your
+autoload folder, then add the following to your kakrc:
+```
+# Optionally set the window manager
+# This option will be set to 'tmux' by default
+set-option global repl_window_manager 'tmux'
+
+# Ensure the repl-mode commands are loaded:
+require-module repl-mode
+
+# Suggested user mode mapping
+map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
+
+# Register default mappings for the `repl` user-mode:
+repl-mode-register-default-mappings
+```
 
 # Design Notes
 This plugin was written with [these principles](https://github.com/jordan-yee/principles/blob/master/kakoune-plugins.md) in mind.
