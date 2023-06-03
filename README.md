@@ -54,17 +54,17 @@ REPL in the current and window scope.
   (see example in installation instructions below).
 
 ## Differences to stock repl commands
-- The built-in `repl` command is equivalent to the `repl-open-right` command
-  when using tmux.
-- The `repl-send-text` command improves upon the `send-text` command by
-  focusing the REPL window after sending text. This allows you to immediately
-  execute the command by pressing enter, while still allowing modifications
-  to be made before executing.
-- The `repl-prompt-window-id` command is including to address the problem of
-  losing the "connection" to the REPL window when moving it. This may not be
+- The built-in `repl` command is equivalent to the `repl-mode-open-right`
+  command when using tmux.
+- The `repl-mode-send-text` command improves upon the built-in `send-text`
+  command by focusing the REPL window after sending text, while still allowing
+  modifications to be made before executing.
+- The `repl-mode-prompt-window-id` command is including to address the problem
+  of losing the "connection" to the REPL window when moving it. This may not be
   a problem for all window managers, but it is a problem when moving the REPL
   window (tmux pane) to a new tab (tmux window) in tmux.
   - A recipe for quickly fixing the reference for tmux is provided below.
+- The functionality provided by the other commands is unique to this plugin.
 
 ## Connection to a REPL pane when using TMUX
 When opening a REPL using the included commands/mappings, the REPL ID is
