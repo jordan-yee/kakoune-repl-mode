@@ -68,22 +68,23 @@ REPL in the current and window scope.
 
 ## Connection to a REPL pane when using TMUX
 When opening a REPL using the included commands/mappings, the REPL ID is
-automatically registered. If you restart Kakoune or otherwise want to connect to
-an existing REPL pane, you would use the `repl-mode-prompt-window-id` command
-(mapped to `i` by default). The problem then becomes how to get the target
-window id. Below is the strategy I use for getting the ID in TMUX.
+automatically registered. If you restart Kakoune or otherwise want to connect
+to an existing REPL pane, you would use the `repl-mode-prompt-window-id`
+command (mapped to `i` by default). The problem then becomes how to get the
+target window id. Below is the strategy I use for getting the ID in TMUX.
 
 How to quickly get a specific ID in tmux (manual steps):
 1. Focus the pane containing the REPL.
 2. Execute the tmux command:
    - `display-message -P '#{session_id}:#{window_id}.#{pane_id}'`
 3. Press `D` or key bound to copy-end-of-line.
-4. Return to Kakoune and press `,ri` or trigger the `repl-mode-prompt-window-id` command.
+4. Return to Kakoune and press `,ri` or trigger the `repl-mode-prompt-window-id`
+   command.
 5. Press the tmux leader key followed by `]` or whichever key is bound to paste.
-   - This will paste the line with the copied ID, including the newline, which will
-     submit the prompt. The new REPL window ID is now set.
-6. Test the setting using the `repl-mode-focus` command below, or go ahead and use
-   `repl-mode-send-text` or the default `repl-send-text`.
+   - This will paste the line with the copied ID, including the newline, which
+     will submit the prompt. The new REPL window ID is now set.
+6. Test the setting using the `repl-mode-focus` command below, or go ahead and
+   use `repl-mode-send-text` or the default `repl-send-text`.
 
 To automate those manual steps a bit, add the following to your `.tmux.conf`:
 ```
@@ -106,8 +107,8 @@ My Keypresses (example):
 7. Focus the REPL via the Kakoune mapping: `<space>ro`
 
 # Installation
-This plugin requires the windowing scripts that ship with Kakoune when using the
-included tmux repl-mode implementation.
+This plugin requires the windowing scripts that ship with Kakoune when using
+the included tmux repl-mode implementation.
 
 ## Installing with plug.kak
 To install with [plug.kak](https://github.com/andreyorst/plug.kak), add the
@@ -146,9 +147,9 @@ plug "jordan-yee/kakoune-repl-mode" config %{
 ```
 
 ## Installing manually
-Download `repl-mode.kak` and whichever window manager script(s) you
-wish to use, and either source them in your kakrc or copy them to your
-autoload folder, then add the following to your kakrc:
+Download `repl-mode.kak` and whichever window manager script(s) you wish to
+use, and either source them in your kakrc or copy them to your autoload folder,
+then add the following to your kakrc:
 ```
 # Optionally set the window manager
 # This option will be set to 'tmux' by default
