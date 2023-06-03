@@ -138,6 +138,9 @@ plug "jordan-yee/kakoune-repl-mode" config %{
     #   or even different projects.
     hook global WinSetOption filetype=clojure %{
       set-option window repl_mode_new_repl_command 'lein repl'
+      complete-command -menu repl-mode-set-new-repl-command shell-script-candidates %{
+          printf '%s\n' 'clojure -M:repl/reloaded' 'lein repl :connect' 'lein repl'
+      }
 
       hook -once -always window WinSetOption filetype=.* %{
         unset-option window repl_mode_new_repl_command
