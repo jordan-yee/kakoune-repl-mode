@@ -7,20 +7,21 @@
 
 # TODO:
 # COMMANDS:
-# [x] repl-mode-open-below
-# [x] repl-mode-open-right
-# [x] repl-mode-open-tab
-# [x] repl-mode-set-window-id -hidden
-# [x] repl-mode-prompt-window-id
-# [x] repl-mode-focus
-# [x] repl-mode-send-text
-# [x] repl-mode-eval-text
-# [x] repl-mode-eval-last-command
+# [ ] repl-mode-open-below
+# [ ] repl-mode-open-right
+# [ ] repl-mode-open-tab
+# [ ] repl-mode-set-window-id -hidden
+# [ ] repl-mode-prompt-window-id
+# [ ] repl-mode-focus
+# [ ] repl-mode-send-text
+# [ ] repl-mode-eval-text
+# [ ] repl-mode-eval-last-command
+
 # The below actions can be performed using a window manager, but are not
-# currently included in this module. Adding them would enable the REPL window ID
-# option to be updated after the REPL window is moved, which may not be an issue
-# for all window managers to begin with. They'd also be a convenience to put the
-# REPL right where you want it on a whim:
+# currently included in this module. Adding them would enable the REPL window
+# ID option to be updated after the REPL window is moved, which may not be an
+# issue for all window managers to begin with. They'd also be a convenience to
+# put the REPL right where you want it on a whim:
 # BAM! The REPL appears beneath the current window to quickly execute a command.
 # BAM! The REPL is sent to another tab, out of sight.
 # [ ] repl-mode-move-below
@@ -28,21 +29,22 @@
 # [ ] repl-mode-move-tab
 
 # TODO: Rename 'template' to the name of the window manager you're implementing
-#       functionality for. Whatever you replace `template` with is what you'll
-#       need to set the `repl_mode_window_id` option to for this implementation.
+# functionality for. Whatever you replace `template` with is what you'll need
+# to set the `repl_mode_window_id` option to for this implementation.
 provide-module repl-mode-template %{
 
     # TODO: Open a split window below the current window and set an option that
-    # indicates the ID of the newly created REPL window. This option can then be
-    # used by the other commands to reference the REPL window.
+    # indicates the ID of the newly created REPL window. This option can then
+    # be used by the other commands to reference the REPL window.
     define-command -docstring "Open a REPL split below" \
     repl-mode-open-below %{
         echo "Command not implemented: repl-mode-open-below"
     }
 
     # TODO: Open a split window to the right of the current window and set an
-    # option that indicates the ID of the newly created REPL window. This option
-    # can then be used by the other commands to reference the REPL window.
+    # option that indicates the ID of the newly created REPL window. This
+    # option can then be used by the other commands to reference the REPL
+    # window.
     define-command -docstring "Open a REPL split to the right" \
     repl-mode-open-right %{
         # Existing alias for several window managers:
@@ -58,9 +60,9 @@ provide-module repl-mode-template %{
         echo "Command not implemented: repl-mode-open-tab"
     }
 
-    # TODO: Hidden command used to set the ID of the window containing the REPL.
-    # The window ID is meant to be the coordinates for the REPL window that
-    # enable it to be selected by the window manager regardless of which
+    # TODO: Hidden command used to set the ID of the window containing the
+    # REPL. The window ID is meant to be the coordinates for the REPL window
+    # that enable it to be selected by the window manager regardless of which
     # tab or window is focused.
     define-command -hidden \
     repl-mode-set-window-id %{
@@ -69,9 +71,9 @@ provide-module repl-mode-template %{
         echo "Command not implemented: repl-mode-set-window-id"
     }
 
-    # TODO: Prompt the user to enter the ID of the window containing a REPL, and
-    # set an option to be used by other commands to reference the REPL window.
-    # The default implementation is probably fine, just implement the
+    # TODO: Prompt the user to enter the ID of the window containing a REPL,
+    # and set an option to be used by other commands to reference the REPL
+    # window. The default implementation is probably fine, just implement the
     # `repl-mode-set-window-id` command above.
     define-command -docstring "Set REPL window ID" \
     repl-mode-prompt-window-id %{
@@ -79,17 +81,17 @@ provide-module repl-mode-template %{
     }
 
     # TODO: Focus the window containing a REPL, as indicated by the repl id
-    # option set either automatically by a `repl-mode-open-*` command or manually via
-    # the `repl-mode-prompt-window-id` command.
+    # option set either automatically by a `repl-mode-open-*` command or
+    # manually via the `repl-mode-prompt-window-id` command.
     define-command -docstring "Focus the REPL window" \
     repl-mode-focus %{
         echo "Command not implemented: repl-mode-focus"
     }
 
-    # TODO: Send text to the REPL window and focus it. Ideally, this should also
-    # check whether the currently set REPL window id is a Kakoune client and
-    # abort with an error message to prevent unintended keys from executing in
-    # an instance of Kakoune.
+    # TODO: Send text to the REPL window and focus it. Ideally, this should
+    # also check whether the currently set REPL window id is a Kakoune client
+    # and abort with an error message to prevent unintended keys from executing
+    # in an instance of Kakoune.
     define-command -docstring "Send selected text to the REPL" \
     repl-mode-send-text %{
         # Existing alias for several window managers:

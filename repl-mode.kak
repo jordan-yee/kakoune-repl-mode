@@ -5,8 +5,8 @@
 # Suggested user mode mapping
 # map global user r ': enter-user-mode repl<ret>' -docstring "repl mode"
 
-# Since different window managers have different terminology, the following terms
-# are being used for this interface:
+# Since different window managers have different terminology, the following
+# terms are being used for this interface:
 # > tab    -- tmux window / vim tab page
 # > window -- tmux pane / vim window
 # > below  -- tmux vertical split / vim horizontal split
