@@ -27,7 +27,7 @@ define-command -override repl-mode-set-new-repl-command -params 1 \
 }
 
 define-command -override repl-mode-register-default-mappings %{
-    declare-user-mode repl
+    try %{ declare-user-mode repl }
     map global repl l ': repl-mode-open-right<ret>' -docstring "Open a REPL split to the right"
     map global repl j ': repl-mode-open-below<ret>' -docstring "Open a REPL split below"
     map global repl w ': repl-mode-open-tab<ret>' -docstring "Open a REPL in a new tab (window)"
