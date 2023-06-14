@@ -80,20 +80,37 @@ provide-module -override repl-mode-template %{
         prompt 'Enter REPL window ID: ' repl-mode-set-window-id
     }
 
+    # TODO: Hidden command used to prevent commands meant to be executed in a
+    # REPL from being executed in the current buffer.
+    define-command -override -hidden -docstring "Fail if REPL window ID isn't set" \
+    repl-mode-require-connected-repl %{
+        # Suggested implementation:
+        # evaluate-commands %sh{
+        #     # TODO: Change the repl_id option for the target window manager.
+        #     if [ -z "$kak_opt_tmux_repl_id" ]; then
+        #         echo 'fail A REPL window ID is not set!'
+        #     else
+        #         echo 'nop'
+        #     fi
+        # }
+
+        # echo used instead of fail since this is used in other commands
+        echo -debug "Command not implemented: repl-mode-require-connected-repl"
+    }
+
     # TODO: Focus the window containing a REPL, as indicated by the repl id
     # option set either automatically by a `repl-mode-open-*` command or
     # manually via the `repl-mode-prompt-window-id` command.
     define-command -override -docstring "Focus the REPL window" \
     repl-mode-focus %{
+        repl-mode-require-connected-repl
         fail "Command not implemented: repl-mode-focus"
     }
 
-    # TODO: Send text to the REPL window and focus it. Ideally, this should
-    # also check whether the currently set REPL window id is a Kakoune client
-    # and abort with an error message to prevent unintended keys from executing
-    # in an instance of Kakoune.
+    # TODO: Send text to the REPL window and focus it.
     define-command -override -docstring "Send selected text to the REPL" \
     repl-mode-send-text %{
+        repl-mode-require-connected-repl
         # Existing alias for several window managers:
         # send-text
 
@@ -102,12 +119,10 @@ provide-module -override repl-mode-template %{
         fail "Command not implemented: repl-mode-send-text"
     }
 
-    # TODO: Send text to the REPL window to be evaluated and focus it. Ideally,
-    # this should also check whether the currently set REPL window id is a
-    # Kakoune client and abort with an error message to prevent unintended keys
-    # from executing in an instance of Kakoune.
+    # TODO: Send and evaluate text in the REPL window and focus it.
     define-command -override -docstring "repl-mode-eval-text [text-to-eval]: Evaluate selected text OR [text-to-eval], if given, at the REPL" \
     repl-mode-eval-text -params ..1 %{
+        repl-mode-require-connected-repl
         # Existing alias for several window managers:
         # send-text
 
@@ -116,12 +131,10 @@ provide-module -override repl-mode-template %{
         fail "Command not implemented: repl-mode-eval-text"
     }
 
-    # TODO: Send an up-arrow keypress to the REPL window and focus it. Ideally,
-    # this should also check whether the currently set REPL window id is a
-    # Kakoune client and abort with an error message to prevent unintended keys
-    # from executing in an instance of Kakoune.
+    # TODO: Send up-arrow + evaluate keypress to the REPL window and focus it.
     define-command -override -docstring "repl-mode-eval-last-command: Re-run the last executed command at the REPL" \
     repl-mode-eval-last-command %{
+        repl-mode-require-connected-repl
         # Existing alias for several window managers:
         # repl-send-text
 
