@@ -38,7 +38,7 @@ provide-module repl-mode-template %{
     # be used by the other commands to reference the REPL window.
     define-command -docstring "Open a REPL split below" \
     repl-mode-open-below %{
-        echo "Command not implemented: repl-mode-open-below"
+        fail "Command not implemented: repl-mode-open-below"
     }
 
     # TODO: Open a split window to the right of the current window and set an
@@ -49,7 +49,7 @@ provide-module repl-mode-template %{
     repl-mode-open-right %{
         # Existing alias for several window managers:
         # repl
-        echo "Command not implemented: repl-mode-open-right"
+        fail "Command not implemented: repl-mode-open-right"
     }
 
     # TODO: Open a window in a new tab and set an option that indicates the ID
@@ -57,7 +57,7 @@ provide-module repl-mode-template %{
     # other commands to reference the REPL window.
     define-command -docstring "Open a REPL in a new tab" \
     repl-mode-open-tab %{
-        echo "Command not implemented: repl-mode-open-tab"
+        fail "Command not implemented: repl-mode-open-tab"
     }
 
     # TODO: Hidden command used to set the ID of the window containing the
@@ -68,7 +68,7 @@ provide-module repl-mode-template %{
     repl-mode-set-window-id %{
         # Suggested implementation:
         #set-option global {window-manager}_repl_id %val{text}
-        echo "Command not implemented: repl-mode-set-window-id"
+        fail "Command not implemented: repl-mode-set-window-id"
     }
 
     # TODO: Prompt the user to enter the ID of the window containing a REPL,
@@ -85,7 +85,7 @@ provide-module repl-mode-template %{
     # manually via the `repl-mode-prompt-window-id` command.
     define-command -docstring "Focus the REPL window" \
     repl-mode-focus %{
-        echo "Command not implemented: repl-mode-focus"
+        fail "Command not implemented: repl-mode-focus"
     }
 
     # TODO: Send text to the REPL window and focus it. Ideally, this should
@@ -99,7 +99,7 @@ provide-module repl-mode-template %{
 
         # Focus the REPL window after send-text to edit and/or evaluate it.
         # repl-mode-focus
-        echo "Command not implemented: repl-mode-send-text"
+        fail "Command not implemented: repl-mode-send-text"
     }
 
     # TODO: Send text to the REPL window to be evaluated and focus it. Ideally,
@@ -113,7 +113,7 @@ provide-module repl-mode-template %{
 
         # Focus the REPL window after sending text to be evaluated.
         # repl-mode-focus
-        echo "Command not implemented: repl-mode-eval-text"
+        fail "Command not implemented: repl-mode-eval-text"
     }
 
     # TODO: Send an up-arrow keypress to the REPL window and focus it. Ideally,
@@ -127,7 +127,7 @@ provide-module repl-mode-template %{
 
         # Focus the REPL window after sending text to be evaluated.
         # repl-mode-focus
-        echo "Command not implemented: repl-mode-eval-last-command"
+        fail "Command not implemented: repl-mode-eval-last-command"
     }
 
 }
