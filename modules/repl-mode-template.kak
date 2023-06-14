@@ -31,12 +31,12 @@
 # TODO: Rename 'template' to the name of the window manager you're implementing
 # functionality for. Whatever you replace `template` with is what you'll need
 # to set the `repl_mode_window_id` option to for this implementation.
-provide-module repl-mode-template %{
+provide-module -override repl-mode-template %{
 
     # TODO: Open a split window below the current window and set an option that
     # indicates the ID of the newly created REPL window. This option can then
     # be used by the other commands to reference the REPL window.
-    define-command -docstring "Open a REPL split below" \
+    define-command -override -docstring "Open a REPL split below" \
     repl-mode-open-below %{
         fail "Command not implemented: repl-mode-open-below"
     }
@@ -45,7 +45,7 @@ provide-module repl-mode-template %{
     # option that indicates the ID of the newly created REPL window. This
     # option can then be used by the other commands to reference the REPL
     # window.
-    define-command -docstring "Open a REPL split to the right" \
+    define-command -override -docstring "Open a REPL split to the right" \
     repl-mode-open-right %{
         # Existing alias for several window managers:
         # repl
@@ -55,7 +55,7 @@ provide-module repl-mode-template %{
     # TODO: Open a window in a new tab and set an option that indicates the ID
     # of the newly created REPL window. This option can then be used by the
     # other commands to reference the REPL window.
-    define-command -docstring "Open a REPL in a new tab" \
+    define-command -override -docstring "Open a REPL in a new tab" \
     repl-mode-open-tab %{
         fail "Command not implemented: repl-mode-open-tab"
     }
@@ -64,7 +64,7 @@ provide-module repl-mode-template %{
     # REPL. The window ID is meant to be the coordinates for the REPL window
     # that enable it to be selected by the window manager regardless of which
     # tab or window is focused.
-    define-command -hidden \
+    define-command -override -hidden \
     repl-mode-set-window-id %{
         # Suggested implementation:
         #set-option global {window-manager}_repl_id %val{text}
@@ -75,7 +75,7 @@ provide-module repl-mode-template %{
     # and set an option to be used by other commands to reference the REPL
     # window. The default implementation is probably fine, just implement the
     # `repl-mode-set-window-id` command above.
-    define-command -docstring "Set REPL window ID" \
+    define-command -override -docstring "Set REPL window ID" \
     repl-mode-prompt-window-id %{
         prompt 'Enter REPL window ID: ' repl-mode-set-window-id
     }
@@ -83,7 +83,7 @@ provide-module repl-mode-template %{
     # TODO: Focus the window containing a REPL, as indicated by the repl id
     # option set either automatically by a `repl-mode-open-*` command or
     # manually via the `repl-mode-prompt-window-id` command.
-    define-command -docstring "Focus the REPL window" \
+    define-command -override -docstring "Focus the REPL window" \
     repl-mode-focus %{
         fail "Command not implemented: repl-mode-focus"
     }
@@ -92,7 +92,7 @@ provide-module repl-mode-template %{
     # also check whether the currently set REPL window id is a Kakoune client
     # and abort with an error message to prevent unintended keys from executing
     # in an instance of Kakoune.
-    define-command -docstring "Send selected text to the REPL" \
+    define-command -override -docstring "Send selected text to the REPL" \
     repl-mode-send-text %{
         # Existing alias for several window managers:
         # send-text
@@ -106,7 +106,7 @@ provide-module repl-mode-template %{
     # this should also check whether the currently set REPL window id is a
     # Kakoune client and abort with an error message to prevent unintended keys
     # from executing in an instance of Kakoune.
-    define-command -docstring "repl-mode-eval-text [text-to-eval]: Evaluate selected text OR [text-to-eval], if given, at the REPL" \
+    define-command -override -docstring "repl-mode-eval-text [text-to-eval]: Evaluate selected text OR [text-to-eval], if given, at the REPL" \
     repl-mode-eval-text -params ..1 %{
         # Existing alias for several window managers:
         # send-text
@@ -120,7 +120,7 @@ provide-module repl-mode-template %{
     # this should also check whether the currently set REPL window id is a
     # Kakoune client and abort with an error message to prevent unintended keys
     # from executing in an instance of Kakoune.
-    define-command -docstring "repl-mode-eval-last-command: Re-run the last executed command at the REPL" \
+    define-command -override -docstring "repl-mode-eval-last-command: Re-run the last executed command at the REPL" \
     repl-mode-eval-last-command %{
         # Existing alias for several window managers:
         # repl-send-text

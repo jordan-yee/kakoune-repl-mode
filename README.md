@@ -179,5 +179,33 @@ are being used for this plugin:
 | below  | tmux vertical split / vim horizontal split |
 | right  | tmux horizontal split / vim vertical split |
 
+# Development
+The kakscript in this plugin is [*mostly] written to be reloadable so that you
+can source it after making a change to test things without restarting Kakoune.
+I use this [quick-dev plugin](https://github.com/jordan-yee/kakoune-plugin-quick-dev)
+to do that:
+1. Disable the installation+configuration in kakrc & restart kak.
+2. Open kakoune, then open the quick-dev file with `<space>qe`.
+3. Source file(s) you're working on:
+   ```
+   source "<path-to>/repl-mode.kak"
+   source "<path-to>/repl-mode-tmux.kak"
+   ```
+4. If needed, copy your config below the sourced files and make sure it's
+   adjusted to be reloadable. (Such as if you want to change mappings.)
+5. Edit the plugin scripts, probably by selecting the sourced path and pressing
+   `gf`.
+   - If you're editing a module, you'll have to temporarily disable the module
+     to enable reloading.
+6. After making changes press `<space>qr` to reload them.
+7. Test your changes and repeat.
+
+*except for the use of modules, which are not reloadable
+
+**TODO**
+- [ ] Update things so that you can essentially copy/paste the installation
+  blurb into the quick-dev scratch pad and go, or otherwise reload everything
+  at once.
+
 # Design Notes
 This plugin was written with [these principles](https://github.com/jordan-yee/principles/blob/master/kakoune-plugins.md) in mind.
