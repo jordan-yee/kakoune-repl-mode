@@ -188,6 +188,8 @@ to do that:
 2. Open kakoune, then open the quick-dev file with `<space>qe`.
 3. Source file(s) you're working on:
    ```
+   # Command to copy filepath for current buffer:
+   # `:eval reg dquote %val{buffile}`
    source "<path-to>/repl-mode.kak"
    source "<path-to>/repl-mode-tmux.kak"
    ```
