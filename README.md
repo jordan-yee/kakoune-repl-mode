@@ -9,12 +9,6 @@ Currently, only TMUX functionality is included, but a generic interface is
 provided to make it as easy as possible to add support for a different window
 manager (see the `repl-mode-template.kak` file).
 
-**TODO:**
-- [ ] Check whether there's a connected REPL before executing send/eval
-  commands.
-- [ ] Provide some kind of menu to more easily set the connected repl window
-  from available, detected options.
-
 # Usage
 The suggested user mode binding for activating repl mode is:
 ```
@@ -39,6 +33,7 @@ used with this suggested leader key.
 | j   | repl-mode-open-below        | Open a REPL split below            |
 | w   | repl-mode-open-tab          | Open a REPL in a new tab (window)  |
 | i   | repl-mode-prompt-window-id  | Set REPL window ID                 |
+| I   | repl-mode-select-window-id  | Select REPL window ID from a menu  |
 | o   | repl-mode-focus             | Focus the REPL window              |
 | s   | repl-mode-send-text         | Send selected text to REPL         |
 | e   | repl-mode-eval-text         | Evaluate selected text at the REPL |
@@ -67,6 +62,21 @@ REPL in the current and window scope.
 - The functionality provided by the other commands is unique to this plugin.
 
 ## Connection to a REPL pane when using TMUX
+
+### The new way
+
+To set the target REPL window when using TMUX, you can now use the
+`repl-mode-select-window-id` command (mapped to repl mode I by default, so
+`<space>rI`).
+
+This will open the `tmux choose-tree` menu, filtered by windows with "repl" in
+their name. Press enter on a pane to set that as the new target REPL window.
+
+If your target window does not include "repl" in its name, you can clear the
+filter by pressing `f<c-u><ret>`.
+
+### The old (but still valid) way
+
 When opening a REPL using the included commands/mappings, the REPL ID is
 automatically registered. If you restart Kakoune or otherwise want to connect
 to an existing REPL pane, you would use the `repl-mode-prompt-window-id`

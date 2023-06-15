@@ -47,6 +47,21 @@ provide-module -override repl-mode-tmux %{
         prompt 'Enter REPL window ID: ' repl-mode-set-window-id
     }
 
+    define-command -override -docstring "Select the REPL window ID from a menu" \
+    repl-mode-select-window-id %{
+        repl-mode-prompt-window-id
+        # Open `tmux choose-tree`, filtered for window names containing "repl"
+        # When a pane is selected, display and copy its ID
+        # After the ID has been copied, paste it into the prompt
+        nop %sh{
+            tmux choose-tree -Zf '#{m/ri:repl,#W}' 'display -t "%%" -p "#{session_id}:#{window_id}.#{pane_id}"; send D; paste-buffer'
+        }
+        # NOTE: The above command does NOT block, so any subsequent commands
+        # will be immediately executed BEFORE a selection is made.
+        # So any commands that depend on a selection to be made MUST be
+        # included in the template arg.
+    }
+
     define-command -override -hidden -docstring "Fail if REPL window ID isn't set" \
     repl-mode-require-connected-repl %{
         evaluate-commands %sh{

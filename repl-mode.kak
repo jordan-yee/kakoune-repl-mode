@@ -32,6 +32,7 @@ define-command -override repl-mode-register-default-mappings %{
     map global repl j ': repl-mode-open-below<ret>' -docstring "Open a REPL split below"
     map global repl w ': repl-mode-open-tab<ret>' -docstring "Open a REPL in a new tab (window)"
     map global repl i ': repl-mode-prompt-window-id<ret>' -docstring "Set REPL window ID"
+    map global repl I ': repl-mode-select-window-id<ret>' -docstring "Select REPL window ID"
     map global repl o ': repl-mode-focus<ret>' -docstring "Focus the REPL window"
     map global repl s ': repl-mode-send-text<ret>' -docstring "Send selected text to REPL"
     map global repl e ': repl-mode-eval-text<ret>' -docstring "Evaluate selected text at the REPL"

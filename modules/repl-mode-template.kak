@@ -12,6 +12,8 @@
 # [ ] repl-mode-open-tab
 # [ ] repl-mode-set-window-id -hidden
 # [ ] repl-mode-prompt-window-id
+# [ ] repl-mode-select-window-id
+# [ ] repl-mode-require-connected-repl
 # [ ] repl-mode-focus
 # [ ] repl-mode-send-text
 # [ ] repl-mode-eval-text
@@ -78,6 +80,13 @@ provide-module -override repl-mode-template %{
     define-command -override -docstring "Set REPL window ID" \
     repl-mode-prompt-window-id %{
         prompt 'Enter REPL window ID: ' repl-mode-set-window-id
+    }
+
+    # TODO: Display a menu from which the user can select the window they want
+    # to set as the REPL window. This should set the REPL window ID option.
+    define-command -override -docstring "Select the REPL window ID from a menu" \
+    repl-mode-select-window-id %{
+        fail "Command not implemented: repl-mode-select-window-id"
     }
 
     # TODO: Hidden command used to prevent commands meant to be executed in a
